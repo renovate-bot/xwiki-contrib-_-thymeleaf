@@ -1,0 +1,18 @@
+.runTransformations
+.#-----------------------------------------------------
+.input|xwiki/2.1
+.# Simple static string.
+.#-----------------------------------------------------
+{{thymeleaf}}
+aaa
+{{/thymeleaf}}
+.#-----------------------------------------------------
+.expect|event/1.0
+.#-----------------------------------------------------
+beginDocument
+beginMacroMarkerStandalone [thymeleaf] [] [aaa]
+beginParagraph
+onWord [aaa]
+endParagraph
+endMacroMarkerStandalone [thymeleaf] [] [aaa]
+endDocument

@@ -1,0 +1,60 @@
+.runTransformations
+.#-----------------------------------------------------
+.input|xwiki/2.1
+.# Simple loop without relying on the context.
+.#-----------------------------------------------------
+{{thymeleaf}}
+<th:block th:each="i: ${#numbers.sequence(0, 1)}">
+  <button th:if="${1 == i}" class="active">A</button>
+  <button th:unless="${1 == i}">A</button>
+</th:block>
+{{/thymeleaf}}
+.#-----------------------------------------------------
+.expect|event/1.0
+.#-----------------------------------------------------
+beginDocument
+beginMacroMarkerStandalone [thymeleaf] [] [<th:block th:each="i: ${#numbers.sequence(0, 1)}">
+  <button th:if="${1 == i}" class="active">A</button>
+  <button th:unless="${1 == i}">A</button>
+</th:block>]
+beginParagraph
+onSpace
+onSpace
+onNewLine
+onSpace
+onSpace
+onSpecialSymbol [<]
+onWord [button]
+onSpecialSymbol [>]
+onWord [A]
+onSpecialSymbol [<]
+onSpecialSymbol [/]
+onWord [button]
+onSpecialSymbol [>]
+endParagraph
+beginParagraph
+onSpace
+onSpace
+onSpecialSymbol [<]
+onWord [button]
+onSpace
+onWord [class]
+onSpecialSymbol [=]
+onSpecialSymbol ["]
+onWord [active]
+onSpecialSymbol ["]
+onSpecialSymbol [>]
+onWord [A]
+onSpecialSymbol [<]
+onSpecialSymbol [/]
+onWord [button]
+onSpecialSymbol [>]
+onNewLine
+onSpace
+onSpace
+endParagraph
+endMacroMarkerStandalone [thymeleaf] [] [<th:block th:each="i: ${#numbers.sequence(0, 1)}">
+  <button th:if="${1 == i}" class="active">A</button>
+  <button th:unless="${1 == i}">A</button>
+</th:block>]
+endDocument

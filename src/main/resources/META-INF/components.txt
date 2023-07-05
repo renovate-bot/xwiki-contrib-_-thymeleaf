@@ -1,0 +1,2 @@
+org.xwiki.contrib.thymeleaf.internal.ThymeleafMacro
+org.xwiki.contrib.thymeleaf.internal.DefaultThymeleafManager
