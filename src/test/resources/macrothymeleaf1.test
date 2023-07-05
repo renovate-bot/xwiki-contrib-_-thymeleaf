@@ -11,8 +11,6 @@ aaa
 .#-----------------------------------------------------
 beginDocument
 beginMacroMarkerStandalone [thymeleaf] [] [aaa]
-beginParagraph
-onWord [aaa]
-endParagraph
+onRawText [aaa] [html/5.0]
 endMacroMarkerStandalone [thymeleaf] [] [aaa]
 endDocument

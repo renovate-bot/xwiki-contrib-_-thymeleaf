@@ -19,17 +19,30 @@
  */
 package org.xwiki.contrib.thymeleaf;
 
+import javax.inject.Provider;
 import javax.script.ScriptContext;
 import javax.script.SimpleScriptContext;
 
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.jmock.integration.junit4.JUnit4Mockery;
-import org.junit.runner.RunWith;
-import org.xwiki.rendering.macro.script.ScriptMockSetup;
-import org.xwiki.rendering.test.integration.RenderingTestSuite;
+import org.xwiki.model.reference.DocumentReference;
+import org.xwiki.observation.ObservationManager;
+import org.xwiki.refactoring.internal.ModelBridge;
+import org.xwiki.rendering.test.integration.junit5.RenderingTests;
 import org.xwiki.script.ScriptContextManager;
-import org.xwiki.test.jmock.MockingComponentManager;
+import org.xwiki.security.authorization.ContextualAuthorizationManager;
+import org.xwiki.skinx.SkinExtension;
+import org.xwiki.template.TemplateManager;
+import org.xwiki.test.TestEnvironment;
+import org.xwiki.test.annotation.AllComponents;
+import org.xwiki.test.annotation.ComponentList;
+import org.xwiki.test.mockito.MockitoComponentManager;
+
+import com.xpn.xwiki.XWiki;
+import com.xpn.xwiki.XWikiContext;
+import com.xpn.xwiki.doc.XWikiDocument;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link ThymeleafManager} integration tests.
@@ -37,28 +50,33 @@ import org.xwiki.test.jmock.MockingComponentManager;
  * @version $Id$
  * @since 1.0
  */
-@RunWith(RenderingTestSuite.class)
-public class IntegrationTests
+@AllComponents
+@ComponentList(TestEnvironment.class)
+public class IntegrationTests implements RenderingTests
 {
-    @RenderingTestSuite.Initialized
-    public void initialize(MockingComponentManager componentManager) throws Exception
+    @Initialized
+    public void initialize(MockitoComponentManager componentManager) throws Exception
     {
-        Mockery mockery = new JUnit4Mockery();
+        componentManager.registerComponent(TestEnvironment.class);
+        componentManager.registerMockComponent(TemplateManager.class);
+        componentManager.registerMockComponent(SkinExtension.class, "ssx");
+        componentManager.registerMockComponent(ContextualAuthorizationManager.class);
+        componentManager.registerMockComponent(ModelBridge.class);
+        componentManager.registerMockComponent(ObservationManager.class);
 
-        new ScriptMockSetup(mockery, componentManager);
+        Provider<XWikiContext> xwikiContextProvider =
+            componentManager.registerMockComponent(XWikiContext.TYPE_PROVIDER);
+        XWikiContext xcontext = mock(XWikiContext.class);
+        when(xwikiContextProvider.get()).thenReturn(xcontext);
 
-        // Script Context Mock
-        final ScriptContextManager scm = componentManager.registerMockComponent(mockery, ScriptContextManager.class);
-        final SimpleScriptContext scriptContext = new SimpleScriptContext();
+        XWiki xWiki = mock(XWiki.class);
+        when(xcontext.getWiki()).thenReturn(xWiki);
+        when(xWiki.getDocument(any(DocumentReference.class), any())).thenReturn(mock(XWikiDocument.class));
+
+        ScriptContextManager scm = componentManager.registerMockComponent(ScriptContextManager.class);
+        SimpleScriptContext scriptContext = new SimpleScriptContext();
         scriptContext.setAttribute("var", "</span><script>console.log('p0wned');</script>", ScriptContext.ENGINE_SCOPE);
-
-        mockery.checking(new Expectations()
-        {
-            {
-                allowing(scm).getScriptContext();
-                will(returnValue(scriptContext));
-            }
-        });
+        when(scm.getScriptContext()).thenReturn(scriptContext);
     }
 }
 

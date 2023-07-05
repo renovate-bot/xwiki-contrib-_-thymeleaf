@@ -17,42 +17,13 @@ beginMacroMarkerStandalone [thymeleaf] [] [<th:block th:each="i: ${#numbers.sequ
   <button th:if="${1 == i}" class="active">A</button>
   <button th:unless="${1 == i}">A</button>
 </th:block>]
-beginParagraph
-onSpace
-onSpace
-onNewLine
-onSpace
-onSpace
-onSpecialSymbol [<]
-onWord [button]
-onSpecialSymbol [>]
-onWord [A]
-onSpecialSymbol [<]
-onSpecialSymbol [/]
-onWord [button]
-onSpecialSymbol [>]
-endParagraph
-beginParagraph
-onSpace
-onSpace
-onSpecialSymbol [<]
-onWord [button]
-onSpace
-onWord [class]
-onSpecialSymbol [=]
-onSpecialSymbol ["]
-onWord [active]
-onSpecialSymbol ["]
-onSpecialSymbol [>]
-onWord [A]
-onSpecialSymbol [<]
-onSpecialSymbol [/]
-onWord [button]
-onSpecialSymbol [>]
-onNewLine
-onSpace
-onSpace
-endParagraph
+onRawText [
+  
+  <button>A</button>
+
+  <button class="active">A</button>
+  
+] [html/5.0]
 endMacroMarkerStandalone [thymeleaf] [] [<th:block th:each="i: ${#numbers.sequence(0, 1)}">
   <button th:if="${1 == i}" class="active">A</button>
   <button th:unless="${1 == i}">A</button>

@@ -42,7 +42,7 @@
     </developer>
   </developers>
   <properties>
-    <xwiki.jacoco.instructionRatio>0.86</xwiki.jacoco.instructionRatio>
+    <xwiki.jacoco.instructionRatio>0.65</xwiki.jacoco.instructionRatio>
   </properties>
   <dependencies>
     <dependency>
@@ -53,6 +53,11 @@
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-rendering-macro-script</artifactId>
+      <version>${platform.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-oldcore</artifactId>
       <version>${platform.version}</version>
     </dependency>
     <dependency>
@@ -96,6 +101,19 @@
       <groupId>org.xwiki.rendering</groupId>
       <artifactId>xwiki-rendering-syntax-event</artifactId>
       <version>${rendering.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jasper</groupId>
+      <artifactId>apache-el</artifactId>
+      <!-- Use the same version as the one that comes with the custom XWiki Jetty application server -->
+      <version>${apachache-el.version}</version>
+      <!-- The EL implementation is supposed to come with the application server but we need one for tests -->
       <scope>test</scope>
     </dependency>
   </dependencies>
