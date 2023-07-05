@@ -21,6 +21,7 @@ package org.xwiki.contrib.thymeleaf.internal;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,10 +29,12 @@ import javax.inject.Singleton;
 
 import org.xwiki.component.annotation.Component;
 import org.xwiki.contrib.thymeleaf.ThymeleafManager;
-import org.xwiki.rendering.macro.MacroExecutionException;
+import org.xwiki.rendering.block.Block;
+import org.xwiki.rendering.block.RawBlock;
 import org.xwiki.rendering.macro.descriptor.DefaultContentDescriptor;
 import org.xwiki.rendering.macro.script.AbstractScriptMacro;
 import org.xwiki.rendering.macro.script.ScriptMacroParameters;
+import org.xwiki.rendering.syntax.Syntax;
 import org.xwiki.rendering.transformation.MacroTransformationContext;
 
 /**
@@ -66,16 +69,17 @@ public class ThymeleafMacro extends AbstractScriptMacro<ScriptMacroParameters>
 
     @Override
     protected String evaluateString(ScriptMacroParameters parameters, String content,
-        MacroTransformationContext context) throws MacroExecutionException
+        MacroTransformationContext context)
     {
-        String key = context.getTransformationContext().getId();
-        if (key == null) {
-            throw new MacroExecutionException("unknown namespace");
-        }
-
         StringWriter stringWriter = new StringWriter();
         this.thymeleafManager.evaluate(stringWriter, new StringReader(content));
-
         return stringWriter.toString();
+    }
+
+    @Override
+    protected List<Block> parseScriptResult(String content, ScriptMacroParameters parameters,
+        MacroTransformationContext context)
+    {
+        return List.of(new RawBlock(content, Syntax.HTML_5_0));
     }
 }

@@ -64,8 +64,9 @@ public class DefaultThymeleafManager implements ThymeleafManager
 
         try {
             String string = IOUtils.toString(reader);
-            writer.write(templateEngine.process(string, context));
+            templateEngine.process(string, context, writer);
         } catch (IOException e) {
+            // TODO: improve!
             throw new RuntimeException(e);
         }
     }

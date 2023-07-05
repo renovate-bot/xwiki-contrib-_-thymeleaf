@@ -48,3 +48,9 @@
 ## Whatever 
 ...
 </optional> 
+
+## TODO:
+
+- [ ] `${a.b}` does not fallback to `${a.get('b'}`
+- [ ] `#{a.b}` should lookup for a translation key name `a.b`
+- [] how to bind a velocity macro into thymeleaf
