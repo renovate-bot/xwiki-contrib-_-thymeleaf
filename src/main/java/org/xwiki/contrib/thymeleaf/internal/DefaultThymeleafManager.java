@@ -81,9 +81,14 @@ public class DefaultThymeleafManager implements ThymeleafManager
     public void evaluate(Writer writer, Reader reader)
     {
         TemplateEngine templateEngine = new TemplateEngine();
+        XWikiTemplateResolver xWikiTemplateResolver = new XWikiTemplateResolver();
+//        xWikiTemplateResolver.setCheckExistence(true);
+        xWikiTemplateResolver.setOrder(1);
+        StringTemplateResolver stringTemplateResolver = new StringTemplateResolver();
+        stringTemplateResolver.setOrder(2);
         templateEngine.setTemplateResolvers(Set.of(
-            new XWikiTemplateResolver(),
-            new StringTemplateResolver()
+            stringTemplateResolver,
+            xWikiTemplateResolver
         ));
         Context context = new Context();
 

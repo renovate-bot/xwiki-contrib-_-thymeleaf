@@ -51,8 +51,9 @@
 
 ## TODO:
 
-- [ ] `${a.b}` does not fallback to `${a.get('b'}`
+- [ ] `${a.b}` does not fallback to `${a.get('b'}` (**WIP**)
 - [ ] `#{a.b}` should lookup for a translation key name `a.b`
-- [] how to bind a velocity macro into thymeleaf
-- parameters conversion?
-- how to set variables?
+- [ ] how to bind a velocity macro into thymeleaf
+- [ ] parameters conversion?
+- [x] how to set variables? => `th:with`
+- [ ] performances?

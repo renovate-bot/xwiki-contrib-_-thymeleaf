@@ -71,7 +71,9 @@ public class IntegrationTests implements RenderingTests
 
         XWiki xWiki = mock(XWiki.class);
         when(xcontext.getWiki()).thenReturn(xWiki);
-        when(xWiki.getDocument(any(DocumentReference.class), any())).thenReturn(mock(XWikiDocument.class));
+        XWikiDocument document = mock(XWikiDocument.class);
+        when(document.isNew()).thenReturn(true);
+        when(xWiki.getDocument(any(DocumentReference.class), any())).thenReturn(document);
 
         ScriptContextManager scm = componentManager.registerMockComponent(ScriptContextManager.class);
         SimpleScriptContext scriptContext = new SimpleScriptContext();
