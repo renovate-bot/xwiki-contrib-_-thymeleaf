@@ -11,12 +11,3 @@
 * License: LGPL 2.1
 * [Sonar Dashboard](https://sonarcloud.io/project/overview?id=org.xwiki.contrib%3Athymeleaf)
 * Continuous Integration Status: [![Build Status](https://ci.xwiki.org/view/Contrib/job/XWiki%20Contrib/job/thymeleaf/job/main/badge/icon)](https://ci.xwiki.org/view/Contrib/job/XWiki%20Contrib/job/thymeleaf/job/main/)
-
-## TODO:
-
-- [ ] `${a.b}` does not fallback to `${a.get('b'}` (**WIP**)
-- [ ] `#{a.b}` should lookup for a translation key name `a.b`
-- [ ] how to bind a velocity macro into thymeleaf
-- [ ] parameters conversion?
-- [x] how to set variables? => `th:with`
-- [ ] performances?
