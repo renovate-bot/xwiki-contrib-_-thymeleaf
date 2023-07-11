@@ -27,10 +27,22 @@
     <artifactId>parent-platform</artifactId>
     <version>14.10.10</version>
   </parent>
-  <artifactId>xwiki-thymeleaf-macro</artifactId>
+  <artifactId>thymeleaf</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Thymeleaf Macro</name>
   <description>Thymeleaf Template Integration in XWiki</description>
+  <packaging>pom</packaging>
+  <properties>
+    <xwiki.issueManagement.system>jira</xwiki.issueManagement.system>
+    <xwiki.issueManagement.url>https://jira.xwiki.org/browse/THYMELEAF</xwiki.issueManagement.url>
+    <xwiki.release.jira.skip>false</xwiki.release.jira.skip>
+  </properties>
+  <scm>
+    <connection>scm:git:git://github.com/xwiki-contrib/thymeleaf.git</connection>
+    <developerConnection>scm:git:git@github.com:xwiki-contrib/thymeleaf.git</developerConnection>
+    <url>https://github.com/xwiki-contrib/thymeleaf</url>
+    <tag>HEAD</tag>
+  </scm>
   <developers>
     <developer>
       <id>mleduc</id>
@@ -41,80 +53,7 @@
       <name>Dorian OUAKLI</name>
     </developer>
   </developers>
-  <properties>
-    <xwiki.jacoco.instructionRatio>0.65</xwiki.jacoco.instructionRatio>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.xwiki.commons</groupId>
-      <artifactId>xwiki-commons-component-api</artifactId>
-      <version>${commons.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-rendering-macro-script</artifactId>
-      <version>${platform.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-oldcore</artifactId>
-      <version>${platform.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>3.1.1.RELEASE</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <!-- test dependencies -->
-    <dependency>
-      <groupId>org.xwiki.rendering</groupId>
-      <artifactId>xwiki-rendering-test</artifactId>
-      <version>${rendering.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-rendering-macro-script</artifactId>
-      <version>${platform.version}</version>
-      <type>test-jar</type>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.commons</groupId>
-      <artifactId>xwiki-commons-observation-local</artifactId>
-      <version>${commons.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.rendering</groupId>
-      <artifactId>xwiki-rendering-syntax-xwiki21</artifactId>
-      <version>${rendering.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.xwiki.rendering</groupId>
-      <artifactId>xwiki-rendering-syntax-event</artifactId>
-      <version>${rendering.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mortbay.jasper</groupId>
-      <artifactId>apache-el</artifactId>
-      <!-- Use the same version as the one that comes with the custom XWiki Jetty application server -->
-      <version>${apachache-el.version}</version>
-      <!-- The EL implementation is supposed to come with the application server but we need one for tests -->
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+  <modules>
+    <module>thymeleaf-macro</module>
+  </modules>
 </project>
